@@ -14,13 +14,19 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->uuid('customer_uuid')->nullable()->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
+
+            $table->softDeletes(); // For soft deletes
+            $table->string('created_by')->nullable(); // Optional, if you want to track who created the record
+            $table->string('updated_by')->nullable(); // Optional, if you want to track who updated the record
+            $table->string('deleted_by')->nullable(); // Optional, if you want to track who deleted the record
+            /* Foreign key will be added in a separate migration after both tables exist */
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
