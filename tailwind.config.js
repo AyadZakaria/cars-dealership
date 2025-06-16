@@ -1,0 +1,28 @@
+/**
+ * If you see "require is not a function", ensure:
+ * - Your package.json does NOT have "type": "module"
+ * - This file is named tailwind.config.js (not .mjs or .cjs)
+ * - Vite and PostCSS expect CommonJS for config files
+ */
+const defaultTheme = require("tailwindcss/defaultTheme");
+const forms = require("@tailwindcss/forms");
+const typography = require("@tailwindcss/typography");
+
+module.exports = {
+    content: [
+        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+        "./vendor/laravel/jetstream/**/*.blade.php",
+        "./storage/framework/views/*.php",
+        "./resources/views/**/*.blade.php",
+    ],
+
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ["Figtree", ...defaultTheme.fontFamily.sans],
+            },
+        },
+    },
+
+    plugins: [forms, typography],
+};
