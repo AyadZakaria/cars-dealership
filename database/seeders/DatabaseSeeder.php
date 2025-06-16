@@ -3,6 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Car;
+use App\Models\Customer;
+use App\Models\Reservation;
+use App\Models\Purchase;
+use App\Models\Rent;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,11 +18,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Create a test user
+        User::updateOrCreate(
+            ['email' => 'test@example.com'],
+            [
+                'name' => 'Test User',
+                'email_verified_at' => now(),
+                'password' => bcrypt('password'),
+                'remember_token' => \Illuminate\Support\Str::random(10),
+            ]
+        );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Create 15 users, cars, customers, reservations, purchases, and rents
+        User::factory(15)->create();
+        Car::factory(15)->create();
+        Customer::factory(15)->create();
+        Reservation::factory(15)->create();
+        Purchase::factory(15)->create();
+        Rent::factory(15)->create();
     }
 }

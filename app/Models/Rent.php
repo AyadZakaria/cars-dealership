@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rent extends Model
 {
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+
     protected $fillable = [
         'uuid',
         'reservation_uuid',

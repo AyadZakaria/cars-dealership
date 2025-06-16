@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reservation extends Model
 {
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+
     protected $fillable = [
         'uuid',
         'car_uuid',
@@ -28,8 +30,8 @@ class Reservation extends Model
         'customer_uuid' => 'string',
         'rent_start_date' => 'datetime',
         'rent_end_date' => 'datetime',
-        'status' => 'enum:pending,confirmed,cancelled,completed,rejected',
-        'reservation_type' => 'enum:rent,sale',
+        'status' => 'string',
+        'reservation_type' => 'string',
         'total_price' => 'decimal:2',
         'is_confirmed' => 'boolean',
         'created_at' => 'datetime',
