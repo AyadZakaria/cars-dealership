@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -19,8 +20,9 @@
         </div>
         <nav class="flex-1 p-4">
             <ul class="space-y-2">
+                
                 <li>
-                    <a href="{{ route('dashboard') }}"
+                    <a href="{{ route('home') }}"
                         class="flex items-center gap-2 px-3 py-2 rounded text-gray-700 hover:bg-[#ffe5dc] hover:text-[#FFA07A]">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path
@@ -97,9 +99,7 @@
                                 </svg>
                             </button>
                         </x-slot>
-                        <x-dropdown-link href="{{ route('dashboard') }}">
-                            Dashboard
-                        </x-dropdown-link>
+                        
                         <x-dropdown-link href="{{ route('profile.show') }}">
                             Profile
                         </x-dropdown-link>

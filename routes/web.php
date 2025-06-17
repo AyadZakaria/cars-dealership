@@ -12,11 +12,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        $cars = \App\Models\Car::paginate(12);
-        return view('dashboard', compact('cars'));
-    })->name('dashboard');
-
+    
     Route::get('/my-reservations', function () {
         return view('my-reservations');
     })->middleware(['auth'])->name('my-reservations');

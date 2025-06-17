@@ -18,9 +18,7 @@
                             </svg>
                         </button>
                     </x-slot>
-                    <x-dropdown-link href="{{ route('dashboard') }}">
-                        Dashboard
-                    </x-dropdown-link>
+                    
                     <x-dropdown-link href="{{ route('profile.show') }}">
                         Profile
                     </x-dropdown-link>
