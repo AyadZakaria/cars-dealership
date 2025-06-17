@@ -2,7 +2,7 @@
 
 @section('content')
     <h1 class="text-2xl font-bold mb-6">Add Car</h1>
-    <form action="{{ route('admin.cars.store') }}" method="POST" class="bg-white p-6 rounded shadow-md max-w-lg">
+<form action="{{ route('admin.cars.store') }}" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded shadow-md max-w-lg">
         @csrf
         <div class="mb-4">
             <label class="block mb-1 font-semibold">Brand <span class="text-red-500">*</span></label>
@@ -38,10 +38,10 @@
                 <option value="hybrid">Hybrid</option>
             </select>
         </div>
-        <div class="mb-4">
-            <label class="block mb-1 font-semibold">Image URL</label>
-            <input type="url" name="image_url" class="w-full border px-3 py-2 rounded">
-        </div>
+<div class="mb-4">
+    <label class="block mb-1 font-semibold">Car Image</label>
+    <input type="file" name="image" accept="image/*" class="w-full border px-3 py-2 rounded">
+</div>
         <div class="mb-4">
             <label class="block mb-1 font-semibold">Mileage</label>
             <input type="number" name="mileage" class="w-full border px-3 py-2 rounded" min="0" value="0">

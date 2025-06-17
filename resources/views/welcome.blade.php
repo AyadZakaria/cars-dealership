@@ -33,13 +33,13 @@
             @forelse($cars as $car)
                 <div
                     class="bg-white rounded-2xl shadow-lg border border-[#e3e3e0] overflow-hidden flex flex-col transition-transform hover:-translate-y-2 hover:shadow-2xl">
-                    @if ($car->image)
-                        <img src="{{ asset('storage/' . $car->image) }}" alt="{{ $car->brand }} {{ $car->model }}"
+                    @if ($car->image_url)
+                        <img src="{{ $car->image_url }}" alt="{{ $car->brand }} {{ $car->model }}"
                             class="w-full h-56 object-cover">
                     @else
                         <div class="w-full h-56 bg-[#dbdbd7] flex items-center justify-center text-2xl text-[#706f6c]">
-                            No
-                            Image</div>
+                            No Image
+                        </div>
                     @endif
                     <div class="p-6 flex-1 flex flex-col">
                         <h2 class="text-2xl font-semibold mb-2 text-[#1b1b18]">{{ $car->brand }} {{ $car->model }}

@@ -2,8 +2,8 @@
     <div class="bg-[#FDFDFC] min-h-screen py-12 px-4 flex flex-col items-center">
         <div class="w-full max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl p-0 md:p-10 mb-10 flex flex-col md:flex-row gap-10">
             <div class="flex-shrink-0 w-full md:w-1/2 flex flex-col items-center justify-center p-6">
-                @if($car->image)
-                    <img src="{{ asset('storage/' . $car->image) }}" alt="{{ $car->brand }} {{ $car->model }}" class="w-full h-80 object-cover rounded-2xl border border-[#e3e3e0] shadow-lg">
+                @if($car->image_url)
+                    <img src="{{ $car->image_url }}" alt="{{ $car->brand }} {{ $car->model }}" class="w-full h-80 object-cover rounded-2xl border border-[#e3e3e0] shadow-lg">
                 @else
                     <div class="w-full h-80 bg-[#dbdbd7] flex items-center justify-center text-2xl text-[#706f6c] rounded-2xl border border-[#e3e3e0] shadow-lg">No Image</div>
                 @endif

@@ -20,9 +20,7 @@ class Car extends Model
         'fuel_type',
         'availability',
         'in_service',
-        'created_at',
-        'updated_at',
-        'deleted_at'
+        'created_by'
     ];
     protected $table = 'cars';
 
