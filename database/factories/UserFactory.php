@@ -46,6 +46,21 @@ class UserFactory extends Factory
     }
 
     /**
+     * Indicate that the user is an admin.
+     */
+    public function admin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_admin' => true,
+            'email' => 'admin@cardealership.test',
+            'password' => static::$password ??= \Illuminate\Support\Facades\Hash::make('admin123'),
+            'remember_token' => Str::random(10),
+            'email_verified_at' => now(),
+            'name' => 'Admin User',
+        ]);
+    }
+
+    /**
      * Indicate that the user should have a personal team.
      */
     public function withPersonalTeam(?callable $callback = null): static

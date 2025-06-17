@@ -22,10 +22,23 @@ class DatabaseSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'test@example.com'],
             [
-                'name' => 'Test User',
+                'name' => 'Test Admin',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'remember_token' => \Illuminate\Support\Str::random(10),
+                'is_admin' => true,
+            ]
+        );
+
+        // Create or update an admin user
+        User::updateOrCreate(
+            ['email' => 'ayad.admin@laravel.com'],
+            [
+                'name' => 'Ayad Admin',
+                'email_verified_at' => now(),
+                'password' => bcrypt('ayad.admin@laravel.com'),
+                'remember_token' => \Illuminate\Support\Str::random(10),
+                'is_admin' => true,
             ]
         );
 

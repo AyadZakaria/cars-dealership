@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $cars = \App\Models\Car::paginate(12);
     return view('welcome', compact('cars'));
-});
+})->name('home');
 
 Route::middleware([
     'auth:sanctum',
@@ -16,6 +16,10 @@ Route::middleware([
         $cars = \App\Models\Car::paginate(12);
         return view('dashboard', compact('cars'));
     })->name('dashboard');
+
+    Route::get('/my-reservations', function () {
+        return view('my-reservations');
+    })->middleware(['auth'])->name('my-reservations');
 });
 
 // Car details and reservation

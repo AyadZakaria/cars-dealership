@@ -74,13 +74,6 @@ If seeders create a default admin user, use these credentials (update if differe
 
 Otherwise, register a new user and assign admin privileges manually.
 
-## Running Tests
-
-To run the test suite:
-```bash
-php artisan test
-```
-
 ## License
 
 This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

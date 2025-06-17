@@ -14,13 +14,15 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 
 <body class="font-sans antialiased">
     <x-banner />
 
     <div class="min-h-screen bg-gray-100">
-        @livewire('navigation-menu')
+        <x-navbar />
 
         <!-- Page Heading -->
         @if (isset($header))
@@ -38,6 +40,35 @@
     </div>
 
     @stack('modals')
-</body>
 
+    {{-- Toastify notifications for session flashes --}}
+    @if (session('success'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Toastify({
+                    text: @json(session('success')),
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#22c55e",
+                    stopOnFocus: true,
+                }).showToast();
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Toastify({
+                    text: @json(session('error')),
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#ef4444",
+                    stopOnFocus: true,
+                }).showToast();
+            });
+        </script>
+    @endif
+</body>
 </html>
