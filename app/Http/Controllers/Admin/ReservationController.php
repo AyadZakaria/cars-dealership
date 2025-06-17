@@ -12,7 +12,7 @@ class ReservationController extends Controller
 {
     public function index()
     {
-        $reservations = Reservation::with(['customer', 'car'])->get();
+        $reservations = Reservation::with(['customer', 'car'])->paginate(10);
         return view('admin.reservations.index', compact('reservations'));
     }
 

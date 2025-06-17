@@ -35,40 +35,47 @@
             </div>
         </div>
     </div>
-    <table class="min-w-full bg-white shadow rounded">
-        <thead>
-            <tr>
-                <th class="py-2 px-4 border-b">ID</th>
-                <th class="py-2 px-4 border-b">Name</th>
-                <th class="py-2 px-4 border-b">Email</th>
-                <th class="py-2 px-4 border-b">Admin</th>
-                <th class="py-2 px-4 border-b">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($users as $user)
+    <div class="relative overflow-x-auto">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
-                    <td class="py-2 px-4 border-b">{{ $user->id }}</td>
-                    <td class="py-2 px-4 border-b">{{ $user->name }}</td>
-                    <td class="py-2 px-4 border-b">{{ $user->email }}</td>
-                    <td class="py-2 px-4 border-b">
-                        @if($user->is_admin)
-                            <span class="text-green-600 font-semibold">Yes</span>
-                        @else
-                            <span class="text-gray-500">No</span>
-                        @endif
-                    </td>
-                    <td class="py-2 px-4 border-b">
-                        <a href="{{ route('admin.users.show', $user) }}" class="text-blue-600 hover:underline">View</a>
-                        <a href="{{ route('admin.users.edit', $user) }}" class="text-yellow-600 hover:underline ml-2">Edit</a>
-                        <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-600 hover:underline ml-2" onclick="return confirm('Delete this user?')">Delete</button>
-                        </form>
-                    </td>
+                    <th scope="col" class="px-6 py-3">ID</th>
+                    <th scope="col" class="px-6 py-3">Name</th>
+                    <th scope="col" class="px-6 py-3">Email</th>
+                    <th scope="col" class="px-6 py-3">Admin</th>
+                    <th scope="col" class="px-6 py-3 text-center">Actions</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach($users as $user)
+                    <tr class="bg-white border-b border-gray-200">
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $user->id }}</td>
+                        <td class="px-6 py-4">{{ $user->name }}</td>
+                        <td class="px-6 py-4">{{ $user->email }}</td>
+                        <td class="px-6 py-4">
+                            @if($user->is_admin)
+                                <span class="text-green-600 font-semibold">Yes</span>
+                            @else
+                                <span class="text-gray-500">No</span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <a href="{{ route('admin.users.show', $user) }}" class="text-blue-600 hover:underline">View</a>
+                            <a href="{{ route('admin.users.edit', $user) }}" class="text-yellow-600 hover:underline ml-2">Edit</a>
+                            <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-600 hover:underline ml-2" onclick="return confirm('Delete this user?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    @if(method_exists($users, 'links'))
+        <div class="mt-4 flex justify-center">
+            {{ $users->links() }}
+        </div>
+    @endif
 @endsection

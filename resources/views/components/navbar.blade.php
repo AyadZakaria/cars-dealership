@@ -8,6 +8,11 @@
             <x-nav-link href="{{ route('dashboard') }}" :active="request()->is('dashboard')">
                 Dashboard
             </x-nav-link>
+            @if(Auth::check() && Auth::user()->is_admin)
+                <x-nav-link href="{{ route('admin.cars.index') }}" :active="request()->is('admin*')">
+                    Admin Panel
+                </x-nav-link>
+            @endif
         </div>
         @auth
             <form method="POST" action="{{ route('logout') }}" class="inline">
