@@ -3,24 +3,24 @@
         <div class="flex justify-between flex-1 sm:hidden">
             @if ($paginator->onFirstPage())
                 <span
-                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-[#FFA07A] bg-[#FFDAB9] border border-[#FFA07A] cursor-default leading-5 rounded-full shadow">
+                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-blue-500 bg-blue-100 border border-blue-500 cursor-default leading-5 rounded-full shadow">
                     {!! __('pagination.previous') !!}
                 </span>
             @else
                 <a href="{{ $paginator->previousPageUrl() }}"
-                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-[#FFA07A] bg-white border border-[#FFA07A] leading-5 rounded-full hover:bg-[#FFA07A] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#FFA07A] transition shadow">
+                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-blue-500 bg-white border border-blue-500 leading-5 rounded-full hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition shadow">
                     {!! __('pagination.previous') !!}
                 </a>
             @endif
 
             @if ($paginator->hasMorePages())
                 <a href="{{ $paginator->nextPageUrl() }}"
-                    class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-[#FFA07A] bg-white border border-[#FFA07A] leading-5 rounded-full hover:bg-[#FFA07A] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#FFA07A] transition shadow">
+                    class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-blue-500 bg-white border border-blue-500 leading-5 rounded-full hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition shadow">
                     {!! __('pagination.next') !!}
                 </a>
             @else
                 <span
-                    class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-[#FFA07A] bg-[#FFDAB9] border border-[#FFA07A] cursor-default leading-5 rounded-full shadow">
+                    class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-blue-500 bg-blue-100 border border-blue-500 cursor-default leading-5 rounded-full shadow">
                     {!! __('pagination.next') !!}
                 </span>
             @endif
@@ -49,7 +49,7 @@
                     @if ($paginator->onFirstPage())
                         <span aria-disabled="true" aria-label="{{ __('pagination.previous') }}">
                             <span
-                                class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-[#FFA07A] bg-[#FFDAB9] border border-[#FFA07A] cursor-default rounded-full leading-5 shadow"
+                                class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-blue-500 bg-blue-100 border border-blue-500 cursor-default rounded-full leading-5 shadow"
                                 aria-hidden="true">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
@@ -60,7 +60,7 @@
                         </span>
                     @else
                         <a href="{{ $paginator->previousPageUrl() }}" rel="prev"
-                            class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-[#FFA07A] bg-white border border-[#FFA07A] rounded-full leading-5 hover:bg-[#FFA07A] hover:text-white focus:z-10 focus:outline-none focus:ring-2 focus:ring-[#FFA07A] transition shadow"
+                            class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-blue-500 bg-white border border-blue-500 rounded-full leading-5 hover:bg-blue-500 hover:text-white focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 transition shadow"
                             aria-label="{{ __('pagination.previous') }}">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
@@ -76,7 +76,7 @@
                         @if (is_string($element))
                             <span aria-disabled="true">
                                 <span
-                                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-[#FFA07A] bg-[#FFDAB9] border border-[#FFA07A] cursor-default rounded-full leading-5 shadow">{{ $element }}</span>
+                                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-blue-500 bg-blue-100 border border-blue-500 cursor-default rounded-full leading-5 shadow">{{ $element }}</span>
                             </span>
                         @endif
 
@@ -86,11 +86,11 @@
                                 @if ($page == $paginator->currentPage())
                                     <span aria-current="page">
                                         <span
-                                            class="relative inline-flex items-center px-4 py-2 text-sm font-bold text-white bg-[#FFA07A] border border-[#FFA07A] cursor-default rounded-full leading-5 shadow">{{ $page }}</span>
+                                            class="relative inline-flex items-center px-4 py-2 text-sm font-bold text-white bg-blue-500 border border-blue-500 cursor-default rounded-full leading-5 shadow">{{ $page }}</span>
                                     </span>
                                 @else
                                     <a href="{{ $url }}"
-                                        class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-[#FFA07A] bg-white border border-[#FFA07A] rounded-full leading-5 hover:bg-[#FFA07A] hover:text-white focus:z-10 focus:outline-none focus:ring-2 focus:ring-[#FFA07A] transition shadow"
+                                        class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-blue-500 bg-white border border-blue-500 rounded-full leading-5 hover:bg-blue-500 hover:text-white focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 transition shadow"
                                         aria-label="{{ __('Go to page :page', ['page' => $page]) }}">
                                         {{ $page }}
                                     </a>
@@ -102,7 +102,7 @@
                     {{-- Next Page Link --}}
                     @if ($paginator->hasMorePages())
                         <a href="{{ $paginator->nextPageUrl() }}" rel="next"
-                            class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-[#FFA07A] bg-white border border-[#FFA07A] rounded-full leading-5 hover:bg-[#FFA07A] hover:text-white focus:z-10 focus:outline-none focus:ring-2 focus:ring-[#FFA07A] transition shadow"
+                            class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-blue-500 bg-white border border-blue-500 rounded-full leading-5 hover:bg-blue-500 hover:text-white focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 transition shadow"
                             aria-label="{{ __('pagination.next') }}">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
@@ -113,7 +113,7 @@
                     @else
                         <span aria-disabled="true" aria-label="{{ __('pagination.next') }}">
                             <span
-                                class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-[#FFA07A] bg-[#FFDAB9] border border-[#FFA07A] cursor-default rounded-full leading-5 shadow"
+                                class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-blue-500 bg-blue-100 border border-blue-500 cursor-default rounded-full leading-5 shadow"
                                 aria-hidden="true">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"

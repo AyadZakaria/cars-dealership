@@ -40,5 +40,11 @@
                 </x-dropdown>
             </div>
         @endauth
+        @guest
+            <div class="flex items-center gap-6">
+                <a href="{{ route('login') }}" class="text-blue-500 font-semibold hover:underline transition">Login</a>
+                <a href="{{ route('register') }}" class="px-4 py-2 border border-blue-500 text-blue-500 rounded-lg font-semibold bg-white hover:bg-blue-500 hover:text-white transition">Register</a>
+            </div>
+        @endguest
     </div>
 </nav>
