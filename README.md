@@ -74,11 +74,6 @@ If seeders create a default admin user, use these credentials (update if differe
 
 Otherwise, register a new user and assign admin privileges manually.
 
-## License
-
-This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-
 ## Storage Link To create a symbolic link for the storage directory, run the following command:
 
 ```shell
