@@ -1,9 +1,11 @@
 <?php
 
+use App\Models\Car;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $cars = \App\Models\Car::paginate(12);
+    $cars = Car::orderBy('created_at', 'desc')
+        ->paginate(12);
     return view('welcome', compact('cars'));
 })->name('home');
 
@@ -12,7 +14,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    
+
     Route::get('/my-reservations', function () {
         return view('my-reservations');
     })->middleware(['auth'])->name('my-reservations');

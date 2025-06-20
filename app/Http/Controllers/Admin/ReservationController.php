@@ -12,7 +12,8 @@ class ReservationController extends Controller
 {
     public function index()
     {
-        $reservations = Reservation::with(['customer', 'car'])->paginate(10);
+        $reservations = Reservation::orderBy('created_at', 'desc')
+            ->with(['customer', 'car'])->paginate(10);
         return view('admin.reservations.index', compact('reservations'));
     }
 

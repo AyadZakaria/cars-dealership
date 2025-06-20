@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('image_url')->nullable();
             $table->year('year');
             $table->decimal('price', 10, 2);
+            $table->decimal('purchase_price', 10, 2)->nullable(); // Optional, if you want to track purchase price
             $table->integer('mileage')->default(0);
-            $table->enum('availability', ['for_rent', 'for_sale']);
+            $table->enum('availability', ['for_rent', 'for_sale'])->default('for_rent');
             $table->enum('fuel_type', ['petrol', 'diesel', 'electric', 'hybrid']);
             $table->boolean('in_service')->default(true);
             $table->softDeletes(); // For soft deletes

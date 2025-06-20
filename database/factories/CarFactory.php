@@ -15,13 +15,13 @@ class CarFactory extends Factory
         $brands = ['Toyota', 'Honda', 'Ford', 'BMW', 'Mercedes', 'Tesla', 'Audi', 'Volkswagen'];
         $models = ['Corolla', 'Civic', 'Focus', '3 Series', 'C-Class', 'Model 3', 'A4', 'Golf'];
         $fuelTypes = ['petrol', 'diesel', 'electric', 'hybrid'];
-        $availability = ['for_rent', 'for_sale'];
+        $availability = ['for_rent', 'for_sale', 'both'];
 
         return [
             'uuid' => $this->faker->uuid(),
             'brand' => $this->faker->randomElement($brands),
             'model' => $this->faker->randomElement($models),
-            'image_url' => $this->faker->imageUrl(640, 480, 'cars', true),
+            'image_url' => null, // Assuming image_url is nullable
             'year' => $this->faker->numberBetween(2005, 2024),
             'price' => $this->faker->randomFloat(2, 5000, 100000),
             'mileage' => $this->faker->numberBetween(0, 200000),

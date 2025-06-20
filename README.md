@@ -69,11 +69,18 @@ A web application for managing a car dealership, built with [Laravel](https://la
 
 If seeders create a default admin user, use these credentials (update if different):
 
-- **Email:** admin@example.com
-- **Password:** password
+- **Email:** ayad.admin@laravel.com
+- **Password:** ayad.admin@laravel.com
 
 Otherwise, register a new user and assign admin privileges manually.
 
 ## License
 
 This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+## Storage Link To create a symbolic link for the storage directory, run the following command:
+
+```shell
+php artisan storage:link
+```

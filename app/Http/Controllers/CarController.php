@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Car;
 use App\Models\Reservation;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class CarController extends Controller
@@ -26,8 +27,8 @@ class CarController extends Controller
         ]);
 
         // Find or create customer
-        if (auth()->check()) {
-            $user = auth()->user();
+        if (Auth::check()) {
+            $user = Auth::user();
             $customer = $user->customer ?? \App\Models\Customer::where('user_id', $user->id)->first();
             if (!$customer) {
                 $customer = \App\Models\Customer::create([

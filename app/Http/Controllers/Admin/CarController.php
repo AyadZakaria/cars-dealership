@@ -13,7 +13,8 @@ class CarController extends Controller
 {
     public function index()
     {
-        $cars = Car::paginate(10);
+        $cars = Car::orderBy('created_at', 'desc')
+            ->paginate(10);
         return view('admin.cars.index', compact('cars'));
     }
 
@@ -74,11 +75,36 @@ class CarController extends Controller
     public function update(Request $request, Car $car)
     {
         $validated = $request->validate([
-            'make' => 'required|string|max:255',
+            'brand' => 'required|string|max:255',
             'model' => 'required|string|max:255',
             'year' => 'required|integer',
+            'price' => 'required|numeric|min:0',
+            'availability' => 'required|in:for_rent,for_sale',
+            'fuel_type' => 'required|in:petrol,diesel,electric,hybrid',
+            'image' => 'nullable|image|max:4096',
+            'mileage' => 'nullable|integer|min:0',
+            'in_service' => 'nullable|boolean',
         ]);
-        $car->update($validated);
+
+        $imageUrl = $car->image_url;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $path = $image->store('cars', 'public');
+            $imageUrl = Storage::url($path);
+        }
+
+        $car->update([
+            'brand' => $validated['brand'],
+            'model' => $validated['model'],
+            'year' => $validated['year'],
+            'price' => $validated['price'],
+            'availability' => $validated['availability'],
+            'fuel_type' => $validated['fuel_type'],
+            'image_url' => $imageUrl,
+            'mileage' => $validated['mileage'] ?? 0,
+            'in_service' => $request->has('in_service') ? true : false,
+        ]);
+
         return redirect()->route('admin.cars.index')->with('success', 'Car updated successfully.');
     }
 
