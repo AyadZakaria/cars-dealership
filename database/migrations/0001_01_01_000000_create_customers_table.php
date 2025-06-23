@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('uuid')->unique();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email')->nullable()->unique();
             $table->string('phone')->nullable();
             $table->softDeletes(); // For soft deletes
             $table->string('created_by')->nullable(); // Optional, if you want to track who created the record

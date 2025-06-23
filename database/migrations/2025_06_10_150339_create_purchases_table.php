@@ -17,14 +17,13 @@ return new class extends Migration
             $table->uuid('car_uuid')->nullable();
             $table->uuid('customer_uuid')->nullable();
             $table->dateTime('purchase_date')->nullable();
-            $table->decimal('total_price', 10, 2)->default(0.00);
-            $table->softDeletes(); // For soft deletes
-            $table->string('created_by')->nullable(); // Optional, if you want to track who created the record
-            $table->string('updated_by')->nullable(); // Optional, if you want to track who updated the record
-            $table->string('deleted_by')->nullable(); // Optional, if you want to track who deleted the record
+            $table->softDeletes(); 
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
+            $table->string('deleted_by')->nullable();
             $table->foreign('car_uuid')->references('uuid')->on('cars')->onDelete('cascade');
             $table->foreign('customer_uuid')->references('uuid')->on('customers')->onDelete('cascade');
-            $table->index(['uuid', 'car_uuid', 'customer_uuid']); // Index for faster lookups
+            $table->index(['uuid', 'car_uuid', 'customer_uuid']);
             $table->timestamps();
         });
     }

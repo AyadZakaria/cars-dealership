@@ -18,18 +18,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create a test user
-        User::updateOrCreate(
-            ['email' => 'test@example.com'],
-            [
-                'name' => 'Test Admin',
-                'email_verified_at' => now(),
-                'password' => bcrypt('password'),
-                'remember_token' => \Illuminate\Support\Str::random(10),
-                'is_admin' => true,
-            ]
-        );
-
         // Create or update an admin user
         User::updateOrCreate(
             ['email' => 'ayad.admin@laravel.com'],
@@ -42,12 +30,10 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Create 15 users, cars, customers, reservations, purchases, and rents
-        User::factory(15)->create();
-        Car::factory(15)->create();
-        Customer::factory(15)->create();
-        Reservation::factory(15)->create();
-        Purchase::factory(15)->create();
-        Rent::factory(15)->create();
+        // Create 10 users, cars, customers, reservations, purchases, and rents
+        User::factory(10)->create();
+        Car::factory(10)->create();
+        Customer::factory(10)->create();
+        Reservation::factory(10)->create();
     }
 }

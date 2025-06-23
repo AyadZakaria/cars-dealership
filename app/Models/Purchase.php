@@ -13,7 +13,6 @@ class Purchase extends Model
         'customer_uuid',
         'car_uuid',
         'purchase_date',
-        'total_price',
         'created_at',
         'updated_at',
         'deleted_at'
@@ -25,7 +24,6 @@ class Purchase extends Model
         'customer_uuid' => 'string',
         'car_uuid' => 'string',
         'purchase_date' => 'datetime',
-        'total_price' => 'decimal:2',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',

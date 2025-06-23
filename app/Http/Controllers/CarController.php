@@ -30,6 +30,15 @@ class CarController extends Controller
             'purchase_date' => 'nullable|date',
         ]);
 
+        // If not authenticated, create a new customer
+        if (!$customer) {
+            $customer = \App\Models\Customer::create([
+                'uuid' => (string) Str::uuid(),
+                'name' => $validated['name'],
+                'phone' => $validated['phone'],
+            ]);
+        }
+
         $reservationData = [
             'uuid' => (string) Str::uuid(),
             'car_uuid' => $car->uuid,
@@ -43,9 +52,9 @@ class CarController extends Controller
             $reservationData['rent_start_date'] = $validated['rent_start_date'];
             $reservationData['rent_end_date'] = $validated['rent_end_date'];
             $rent_days_count = (strtotime($validated['rent_end_date']) - strtotime($validated['rent_start_date'])) / (60 * 60 * 24);
-            $reservationData['total_price'] = $rent_days_count * $car->price;
+            $reservationData['total_rent_price'] = $rent_days_count * $car->price;
         } elseif ($validated['type'] === 'sale') {
-            $reservationData['total_price'] = $car->price;
+            $reservationData['total_rent_price'] = $car->price;
         }
 
         $reservation = Reservation::create($reservationData);
@@ -57,6 +66,6 @@ class CarController extends Controller
 
 
         return redirect()->route('home')
-            ->with('success', 'Reservation submitted! Please wait for a phone call to confirm or deny your reservation.');
+            ->with(['success', 'Reservation submitted! Please wait for a phone call to confirm or deny your reservation.', 'car_uuid' => $car->uuid]);
     }
 }

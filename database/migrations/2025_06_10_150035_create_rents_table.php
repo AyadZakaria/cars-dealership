@@ -20,8 +20,8 @@ return new class extends Migration
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
             $table->dateTime('reservation_confirmation_date')->nullable();
-            $table->decimal('total_price', 10, 2)->default(0.00);
-            $table->softDeletes(); // For soft deletes
+            $table->decimal('total_rent_price', 10, 2)->default(0.00);
+            $table->softDeletes(); 
             $table->timestamps();
         });
     }

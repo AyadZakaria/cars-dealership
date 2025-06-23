@@ -16,7 +16,7 @@ class Rent extends Model
         'start_date',
         'end_date',
         'reservation_confirmation_date',
-        'total_price',
+        'total_rent_price',
         'created_at',
         'updated_at',
         'deleted_at'
@@ -31,7 +31,7 @@ class Rent extends Model
         'start_date' => 'datetime',
         'end_date' => 'datetime',
         'reservation_confirmation_date' => 'datetime',
-        'total_price' => 'decimal:2',
+        'total_rent_price' => 'decimal:2',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',

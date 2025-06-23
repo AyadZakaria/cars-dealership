@@ -15,8 +15,8 @@ class RentFactory extends Factory
     public function definition()
     {
         $startDate = $this->faker->dateTimeBetween('-1 month', '+1 month');
-        $endDate = (clone $startDate)->modify('+'.rand(1, 14).' days');
-        $confirmationDate = (clone $startDate)->modify('-'.rand(0, 3).' days');
+        $endDate = (clone $startDate)->modify('+' . rand(1, 14) . ' days');
+        $confirmationDate = (clone $startDate)->modify('-' . rand(0, 3) . ' days');
 
         return [
             'uuid' => $this->faker->uuid(),
@@ -26,7 +26,7 @@ class RentFactory extends Factory
             'start_date' => $startDate,
             'end_date' => $endDate,
             'reservation_confirmation_date' => $confirmationDate,
-            'total_price' => $this->faker->randomFloat(2, 100, 10000),
+            'total_rent_price' => $this->faker->randomFloat(2, 100, 10000),
             'created_at' => now(),
             'updated_at' => now(),
             'deleted_at' => null,

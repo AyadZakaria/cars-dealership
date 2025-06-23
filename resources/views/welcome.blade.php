@@ -4,7 +4,8 @@
         <!-- Minimal Promo Banner -->
         <div class="w-full max-w-3xl mb-12 text-center">
             <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">Drive Your Dream Car</h2>
-            <p class="text-gray-600 text-lg mb-6">Discover the best deals for buying or renting top cars. Fast, easy, and
+            <p class="text-gray-600 text-lg mb-6">
+                Discover the best deals for buying or renting top cars. Fast, easy, and
                 secure.
             </p>
             <a href="#cars"
@@ -12,6 +13,37 @@
                 Cars
             </a>
         </div>
+        <!-- About Section -->
+        <section
+            class="w-full max-w-5xl mb-16 flex flex-col md:flex-row items-center gap-8 bg-white/80 rounded-3xl shadow-lg p-8 border border-blue-100">
+            <!-- Image or Placeholder -->
+            <div class="flex-shrink-0 w-full md:w-1/2 flex items-center justify-center">
+                <!-- Placeholder SVG (replace with image if available) -->
+                <svg width="220" height="160" viewBox="0 0 220 160" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="rounded-2xl shadow-md bg-blue-50">
+                    <rect x="10" y="30" width="200" height="100" rx="20" fill="#3B82F6" />
+                    <rect x="40" y="60" width="140" height="40" rx="10" fill="#60A5FA" />
+                    <circle cx="60" cy="120" r="16" fill="#3B82F6" />
+                    <circle cx="160" cy="120" r="16" fill="#3B82F6" />
+                    <rect x="80" y="80" width="60" height="12" rx="6" fill="#BFDBFE" />
+                </svg>
+            </div>
+            <!-- Text Block -->
+            <div class="flex-1 flex flex-col items-start">
+                <h3 class="text-3xl md:text-4xl font-extrabold text-blue-600 mb-4">About Us</h3>
+                <p class="text-gray-700 text-lg mb-4">
+                    Welcome to our car dealership platform! We are dedicated to connecting you with the best cars for
+                    sale and rent, offering a seamless and secure experience. Our team is passionate about helping you
+                    find your dream car with ease and confidence.
+                </p>
+                <ul class="list-disc pl-5 text-gray-600 space-y-1">
+                    <li>Wide selection of top brands and models</li>
+                    <li>Transparent pricing and flexible options</li>
+                    <li>Trusted by hundreds of happy customers</li>
+                </ul>
+            </div>
+        </section>
+        <!-- Cars Section -->
         <h1 class="text-3xl font-bold mb-8 text-gray-900 tracking-tight">Explore Cars</h1>
         <div id="cars"
             class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl justify-center items-start mx-auto"
@@ -89,7 +121,8 @@
                                     class="inline-flex items-center px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-semibold">
                                     <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" stroke-width="2"
                                         viewBox="0 0 24 24">
-                                        <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round"
+                                            stroke-linejoin="round" />
                                     </svg>
                                     Not in service
                                 </span>
@@ -102,7 +135,8 @@
                                 type="button">
                                 View Details
                             </button>
-                            <div x-show="open" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+                            <div x-show="open"
+                                class="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
                                 @keydown.escape.window="open = false">
                                 <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl p-0 md:p-0 relative flex flex-col md:flex-row gap-0 overflow-hidden border border-blue-100"
                                     @click.away="open = false" x-transition>
@@ -118,8 +152,8 @@
                                             <div
                                                 class="w-full h-64 bg-gray-100 flex items-center justify-center rounded-2xl border border-gray-200 shadow mb-4">
                                                 <!-- Default car SVG icon -->
-                                                <svg width="96" height="60" viewBox="0 0 96 60" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
+                                                <svg width="96" height="60" viewBox="0 0 96 60"
+                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <rect x="12" y="27" width="72" height="18" rx="9"
                                                         fill="#3B82F6" />
                                                     <rect x="24" y="15" width="48" height="18" rx="9"
@@ -187,9 +221,6 @@
                                                 action="{{ route('car.reserve', ['uuid' => $car->uuid]) }}"
                                                 class="space-y-4">
                                                 @csrf
-
-                                                @include('components.validation-and-session-errors')
-
                                                 <div>
                                                     <label class="block text-gray-900 font-medium mb-1"
                                                         for="name">Your Name</label>
@@ -253,7 +284,7 @@
                                                 After submitting, please wait for a phone call to confirm or deny
                                                 your reservation.
                                             </div>
-                                            @if (session('success'))
+                                            @if (session('success') && session('car_uuid') === $car->uuid)
                                                 <div
                                                     class="mt-6 p-4 rounded-lg bg-blue-100 text-blue-700 text-center font-semibold">
                                                     {{ session('success') }}

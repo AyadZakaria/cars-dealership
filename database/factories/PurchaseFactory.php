@@ -20,7 +20,7 @@ class PurchaseFactory extends Factory
             'customer_uuid' => Customer::inRandomOrder()->first()?->uuid ?? \Illuminate\Support\Str::uuid(),
             'car_uuid' => Car::inRandomOrder()->first()?->uuid ?? \Illuminate\Support\Str::uuid(),
             'purchase_date' => $purchaseDate,
-            'total_price' => $this->faker->randomFloat(2, 5000, 100000),
+            'total_rent_price' => $this->faker->randomFloat(2, 5000, 100000),
             'created_at' => now(),
             'updated_at' => now(),
             'deleted_at' => null,
