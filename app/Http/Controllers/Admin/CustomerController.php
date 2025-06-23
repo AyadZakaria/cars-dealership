@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Devrabiul\ToastMagic\Facades\ToastMagic;
 
 class CustomerController extends Controller
 {
@@ -28,7 +29,8 @@ class CustomerController extends Controller
             'phone' => 'required|string|max:255',
         ]);
         Customer::create($validated);
-        return redirect()->route('admin.customers.index')->with('success', 'Customer created successfully.');
+        ToastMagic::success('Customer created successfully.');
+        return redirect()->route('admin.customers.index');
     }
 
     public function show(Customer $customer)
@@ -49,12 +51,14 @@ class CustomerController extends Controller
             'phone' => 'required|string|max:255',
         ]);
         $customer->update($validated);
-        return redirect()->route('admin.customers.index')->with('success', 'Customer updated successfully.');
+        ToastMagic::success('Customer updated successfully.');
+        return redirect()->route('admin.customers.index');
     }
 
     public function destroy(Customer $customer)
     {
         $customer->delete();
-        return redirect()->route('admin.customers.index')->with('success', 'Customer deleted successfully.');
+        ToastMagic::success('Customer deleted successfully.');
+        return redirect()->route('admin.customers.index');
     }
 }

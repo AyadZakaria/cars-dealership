@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    {!! ToastMagic::styles() !!}
 </head>
 
 <body class="bg-gray-100 min-h-screen flex">
@@ -20,7 +22,7 @@
         </div>
         <nav class="flex-1 p-4">
             <ul class="space-y-2">
-                
+
                 <li>
                     <a href="{{ route('home') }}"
                         class="flex items-center gap-2 px-3 py-2 rounded text-gray-700 hover:bg-blue-100 hover:text-blue-500">
@@ -99,7 +101,7 @@
                                 </svg>
                             </button>
                         </x-slot>
-                        
+
                         <x-dropdown-link href="{{ route('profile.show') }}">
                             Profile
                         </x-dropdown-link>
@@ -129,36 +131,7 @@
             </div>
         </main>
     </div>
-
-    {{-- Toastify notifications for session flashes --}}
-    @if (session('success'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Toastify({
-                    text: @json(session('success')),
-                    duration: 3000,
-                    gravity: "top",
-                    position: "right",
-                    backgroundColor: "#22c55e",
-                    stopOnFocus: true,
-                }).showToast();
-            });
-        </script>
-    @endif
-    @if (session('error'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Toastify({
-                    text: @json(session('error')),
-                    duration: 3000,
-                    gravity: "top",
-                    position: "right",
-                    backgroundColor: "#ef4444",
-                    stopOnFocus: true,
-                }).showToast();
-            });
-        </script>
-    @endif
+    {!! ToastMagic::scripts() !!}
 </body>
 
 </html>

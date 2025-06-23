@@ -7,6 +7,7 @@ use App\Models\Reservation;
 use App\Models\Customer;
 use App\Models\Car;
 use Illuminate\Http\Request;
+use Devrabiul\ToastMagic\Facades\ToastMagic;
 
 class ReservationController extends Controller
 {
@@ -27,13 +28,14 @@ class ReservationController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'customer_id' => 'required|exists:customers,id',
-            'car_id' => 'required|exists:cars,id',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
+            'customer_uuid' => 'required|exists:customers,uuid',
+            'car_uuid' => 'required|exists:cars,uuid',
+            'rent_start_date' => 'required|date',
+            'rent_end_date' => 'required|date|after_or_equal:rent_start_date',
         ]);
         Reservation::create($validated);
-        return redirect()->route('admin.reservations.index')->with('success', 'Reservation created successfully.');
+        ToastMagic::success('Reservation created successfully.');
+        return redirect()->route('admin.reservations.index');
     }
 
     public function show(Reservation $reservation)
@@ -52,18 +54,20 @@ class ReservationController extends Controller
     public function update(Request $request, Reservation $reservation)
     {
         $validated = $request->validate([
-            'customer_id' => 'required|exists:customers,id',
-            'car_id' => 'required|exists:cars,id',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
+            'customer_uuid' => 'required|exists:customers,uuid',
+            'car_uuid' => 'required|exists:cars,uuid',
+            'rent_start_date' => 'required|date',
+            'rent_end_date' => 'required|date|after_or_equal:rent_start_date',
         ]);
         $reservation->update($validated);
-        return redirect()->route('admin.reservations.index')->with('success', 'Reservation updated successfully.');
+        ToastMagic::success('Reservation updated successfully.');
+        return redirect()->route('admin.reservations.index');
     }
 
     public function destroy(Reservation $reservation)
     {
         $reservation->delete();
-        return redirect()->route('admin.reservations.index')->with('success', 'Reservation deleted successfully.');
+        ToastMagic::success('Reservation deleted successfully.');
+        return redirect()->route('admin.reservations.index');
     }
 }

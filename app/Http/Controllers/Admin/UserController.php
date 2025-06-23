@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Devrabiul\ToastMagic\Facades\ToastMagic;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -30,10 +31,25 @@ class UserController extends Controller
             'password' => 'required|string|min:6',
             'is_admin' => 'nullable|boolean',
         ]);
+
         $validated['password'] = Hash::make($validated['password']);
-        $validated['is_admin'] = $request->has('is_admin');
-        User::create($validated);
-        return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
+
+        // Check if the user is an admin
+        if ($request->has('is_admin') && $request->input('is_admin')) {
+            $validated['is_admin'] = true;
+        } else {
+            $validated['is_admin'] = false;
+        }
+        // Attempt to create the user
+        try {
+            User::create($validated);
+        } catch (\Exception $e) {
+            ToastMagic::error('Failed to create user: ' . $e->getMessage());
+            return redirect()->back()->withInput();
+        }
+
+        ToastMagic::success('User created successfully.');
+        return redirect()->route('admin.users.index');
     }
 
     public function show(User $user)
@@ -59,14 +75,28 @@ class UserController extends Controller
         }
         $user->name = $validated['name'];
         $user->email = $validated['email'];
-        $user->is_admin = $request->has('is_admin');
-        $user->save();
-        return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
+
+        // Check if the user is an admin
+        if ($request->has('is_admin') && $request->input('is_admin')) {
+            $user->is_admin = true;
+        } else {
+            $user->is_admin = false;
+        }
+        // Attempt to update the user
+        try {
+            $user->save();
+        } catch (\Exception $e) {
+            ToastMagic::error('Failed to update user: ' . $e->getMessage());
+            return redirect()->back()->withInput();
+        }
+        ToastMagic::success('User updated successfully.');
+        return redirect()->route('admin.users.index');
     }
 
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('admin.users.index')->with('success', 'User deleted successfully.');
+        ToastMagic::success('User deleted successfully.');
+        return redirect()->route('admin.users.index');
     }
 }

@@ -187,6 +187,9 @@
                                                 action="{{ route('car.reserve', ['uuid' => $car->uuid]) }}"
                                                 class="space-y-4">
                                                 @csrf
+
+                                                @include('components.validation-and-session-errors')
+
                                                 <div>
                                                     <label class="block text-gray-900 font-medium mb-1"
                                                         for="name">Your Name</label>
@@ -197,9 +200,6 @@
                                                         <div class="text-blue-500 text-sm mt-1">{{ $message }}
                                                         </div>
                                                     @enderror
-
-                                                    <input type="hidden" type="hidden" value="sell"
-                                                        name="reservation_type">
                                                 </div>
                                                 <div>
                                                     <label class="block text-gray-900 font-medium mb-1"
@@ -221,8 +221,9 @@
                                                         $car->availability === 'for_rent' ||
                                                         $car->availability === 'both';
                                                 @endphp
+
                                                 @if ($isForRent)
-                                                    <input type="hidden" name="reservation_type" value="rent">
+                                                    <input type="hidden" name="type" value="rent">
                                                     <div class="flex gap-4">
                                                         <div class="flex-1">
                                                             <label class="block text-gray-900 font-medium mb-1"
@@ -241,6 +242,8 @@
                                                                 value="{{ old('rent_end_date') }}">
                                                         </div>
                                                     </div>
+                                                @elseif ($isForSale)
+                                                    <input type="hidden" name="type" value="sale">
                                                 @endif
                                                 <button type="submit"
                                                     class="w-full py-3 border border-blue-500 text-blue-500 font-bold rounded-lg bg-white hover:bg-blue-500 hover:text-white transition">Submit

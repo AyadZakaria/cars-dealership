@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    {!! ToastMagic::styles() !!}
 </head>
 
 <body class="font-sans antialiased">
@@ -31,35 +32,7 @@
     </div>
 
     @stack('modals')
-
-    {{-- Toastify notifications for session flashes --}}
-    @if (session('success'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Toastify({
-                    text: @json(session('success')),
-                    duration: 3000,
-                    gravity: "top",
-                    position: "right",
-                    backgroundColor: "#22c55e",
-                    stopOnFocus: true,
-                }).showToast();
-            });
-        </script>
-    @endif
-    @if (session('error'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Toastify({
-                    text: @json(session('error')),
-                    duration: 3000,
-                    gravity: "top",
-                    position: "right",
-                    backgroundColor: "#ef4444",
-                    stopOnFocus: true,
-                }).showToast();
-            });
-        </script>
-    @endif
 </body>
+{!! ToastMagic::scripts() !!}
+
 </html>
