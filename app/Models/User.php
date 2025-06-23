@@ -66,4 +66,17 @@ class User extends Authenticatable
             'is_admin' => 'boolean',
         ];
     }
+
+    public function isAdmin(): bool
+    {
+        return $this->is_admin;
+    }
+    public function Customer()
+    {
+        return $this->hasOne(Customer::class, 'user_id', 'id');
+    }
+    public function Reservations()
+    {
+        return $this->hasMany(Reservation::class, 'user_id', 'id');
+    }
 }
