@@ -135,7 +135,7 @@
                                 type="button">
                                 View Details
                             </button>
-                            <div x-show="open"
+                            <div x-show="open" x-cloak
                                 class="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
                                 @keydown.escape.window="open = false">
                                 <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl p-0 md:p-0 relative flex flex-col md:flex-row gap-0 overflow-hidden border border-blue-100"
