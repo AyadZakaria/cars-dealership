@@ -33,13 +33,17 @@ class CreateNewUser implements CreatesNewUsers
         ]);
 
         // Create corresponding Customer profile
-        \App\Models\Customer::create([
+        $customer = \App\Models\Customer::create([
             'uuid' => \Illuminate\Support\Str::uuid(),
             'user_id' => $user->id,
             'name' => $user->name,
             'email' => $user->email,
             'phone' => null,
         ]);
+
+        // Link customer_uuid to user
+        $user->customer_uuid = $customer->uuid;
+        $user->save();
 
         return $user;
     }

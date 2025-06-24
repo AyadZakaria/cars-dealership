@@ -30,6 +30,7 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin',
+        'customer_uuid',
     ];
 
     /**
@@ -71,12 +72,8 @@ class User extends Authenticatable
     {
         return $this->is_admin;
     }
-    public function Customer()
+    public function customer()
     {
         return $this->hasOne(Customer::class, 'user_id', 'id');
-    }
-    public function Reservations()
-    {
-        return $this->hasMany(Reservation::class, 'user_id', 'id');
     }
 }

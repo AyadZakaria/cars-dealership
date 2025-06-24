@@ -2,6 +2,7 @@
 
 use App\Models\Car;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CarController;
 
 Route::get('/', function () {
     $cars = Car::orderBy('created_at', 'desc')
@@ -16,15 +17,24 @@ Route::middleware([
 ])->group(function () {
 
     Route::get('/my-reservations', function () {
-        return view('my-reservations');
+        $user_id = \Illuminate\Support\Facades\Auth::id();
+        $customer = \App\Models\Customer::where('user_id', $user_id)->first();
+        if ($customer) {
+            $reservations = $customer->reservations()
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        } else {
+            $reservations = collect();
+        }
+        return view('my-reservations', compact('reservations'));
     })->middleware(['auth'])->name('my-reservations');
 });
 
 // Car details and reservation
-use App\Http\Controllers\CarController;
 use App\Http\Middleware\IsAdmin;
 
 /* Route::get('/cars/{uuid}', [CarController::class, 'show'])->name('car.details'); */
+
 Route::post('/cars/{uuid}/reserve', [CarController::class, 'reserve'])->name('car.reserve');
 
 // Admin panel routes

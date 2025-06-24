@@ -20,7 +20,8 @@ class CarController extends Controller
     public function reserve(Request $request, $uuid)
     {
         $car = Car::where('uuid', $uuid)->firstOrFail();
-        $customer = Auth::user()?->customer;
+        $user = Auth::user();
+        $customer = $user?->customer;
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:30',
@@ -30,8 +31,24 @@ class CarController extends Controller
             'purchase_date' => 'nullable|date',
         ]);
 
-        // If not authenticated, create a new customer
-        if (!$customer) {
+        // If authenticated and no customer profile, create and link it
+        if ($user && !$customer) {
+            $customer_uuid = $user->customer_uuid ?? (string) Str::uuid();
+            $customer = \App\Models\Customer::create([
+                'uuid' => $customer_uuid,
+                'user_id' => $user->id,
+                'name' => $user->name ?? $validated['name'],
+                'email' => $user->email,
+                'phone' => $validated['phone'],
+            ]);
+
+            $user->customer_uuid = $customer_uuid;
+            $user->save();
+        }
+
+
+        // If not authenticated, create a new customer (guest)
+        if (!$user && !$customer) {
             $customer = \App\Models\Customer::create([
                 'uuid' => (string) Str::uuid(),
                 'name' => $validated['name'],
