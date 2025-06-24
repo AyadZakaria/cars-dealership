@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Reservation;
 use App\Models\Customer;
 use App\Models\Car;
+use App\Models\Rent;
+use App\Models\Purchase;
 use Illuminate\Http\Request;
 use Devrabiul\ToastMagic\Facades\ToastMagic;
 
@@ -68,6 +70,48 @@ class ReservationController extends Controller
     {
         $reservation->delete();
         ToastMagic::success('Reservation deleted successfully.');
+        return redirect()->route('admin.reservations.index');
+    }
+
+    public function confirm($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        $reservation->status = 'confirmed';
+        $reservation->is_confirmed = true;
+        $reservation->save();
+
+        $car = Car::where('uuid', $reservation->car_uuid)->first();
+        if ($reservation->reservation_type === 'rent') {
+            Rent::create([
+                'car_uuid' => $reservation->car_uuid,
+                'customer_uuid' => $reservation->customer_uuid,
+                'rent_start_date' => $reservation->rent_start_date,
+                'rent_end_date' => $reservation->rent_end_date,
+                'total_price' => $reservation->total_rent_price,
+            ]);
+        } elseif ($reservation->reservation_type === 'purchase') {
+            Purchase::create([
+                'car_uuid' => $reservation->car_uuid,
+                'customer_uuid' => $reservation->customer_uuid,
+                'purchase_date' => now(),
+                'total_price' => $reservation->total_sale_price,
+            ]);
+        }
+        if ($car) {
+            $car->in_service = false;
+            $car->save();
+        }
+        ToastMagic::success('Reservation confirmed and processed.');
+        return redirect()->route('admin.reservations.index');
+    }
+
+    public function deny($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        $reservation->status = 'rejected';
+        $reservation->is_confirmed = false;
+        $reservation->save();
+        ToastMagic::success('Reservation denied.');
         return redirect()->route('admin.reservations.index');
     }
 }

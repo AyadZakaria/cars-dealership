@@ -20,8 +20,16 @@
                                 </div>
                             </div>
                             <div class="mt-4 sm:mt-0">
-                                <span class="inline-block px-3 py-1 rounded-full text-xs font-medium
-                                    {{ $reservation->status === 'confirmed' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }}">
+                                @php
+                                    $statusColors = [
+                                        'pending' => 'bg-gray-200 text-gray-800',
+                                        'confirmed' => 'bg-green-200 text-green-800',
+                                        'rejected' => 'bg-red-200 text-red-800',
+                                        'cancelled' => 'bg-yellow-200 text-yellow-800',
+                                        'completed' => 'bg-blue-200 text-blue-800',
+                                    ];
+                                @endphp
+                                <span class="inline-block px-3 py-1 rounded-full text-xs font-medium {{ $statusColors[$reservation->status] ?? 'bg-gray-100 text-gray-700' }}">
                                     {{ ucfirst($reservation->status) }}
                                 </span>
                             </div>

@@ -43,4 +43,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->middleware([IsAdmin::class]);
     Route::resource('customers', \App\Http\Controllers\Admin\CustomerController::class)->middleware([IsAdmin::class]);
     Route::resource('reservations', \App\Http\Controllers\Admin\ReservationController::class)->middleware([IsAdmin::class]);
+    Route::post('reservations/{id}/confirm', [\App\Http\Controllers\Admin\ReservationController::class, 'confirm'])->name('reservations.confirm')->middleware([IsAdmin::class]);
+    Route::post('reservations/{id}/deny', [\App\Http\Controllers\Admin\ReservationController::class, 'deny'])->name('reservations.deny')->middleware([IsAdmin::class]);
 });
