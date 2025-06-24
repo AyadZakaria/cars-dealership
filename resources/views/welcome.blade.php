@@ -237,7 +237,7 @@
                                                         for="phone">Phone Number</label>
                                                     <input type="text" name="phone" id="phone" required
                                                         class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                                                        value="{{ old('phone') ?? (Auth::check() ? Auth::user()->Customer->phone : '') }}">
+                                                        value="{{ old('phone') ?? (Auth::check() && Auth::user()->Customer ? Auth::user()->Customer->phone : '') }}">
                                                     @error('phone')
                                                         <div class="text-blue-500 text-sm mt-1">{{ $message }}
                                                         </div>
