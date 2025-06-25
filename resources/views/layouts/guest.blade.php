@@ -23,9 +23,13 @@
 </head>
 
 <body>
+    <x-navbar />
     <div class="font-sans text-gray-900 antialiased">
-        {{ $slot }}
+        @yield('content')
     </div>
+    @if (!request()->routeIs('login') && !request()->routeIs('register'))
+        <x-footer />
+    @endif
 </body>
 {!! ToastMagic::scripts() !!}
 

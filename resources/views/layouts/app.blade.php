@@ -32,6 +32,7 @@
     </div>
 
     @stack('modals')
+    <x-footer />
 </body>
 {!! ToastMagic::scripts() !!}
 

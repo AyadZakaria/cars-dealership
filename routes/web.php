@@ -3,6 +3,7 @@
 use App\Models\Car;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
     $cars = Car::orderBy('created_at', 'desc')
@@ -36,6 +37,10 @@ use App\Http\Middleware\IsAdmin;
 /* Route::get('/cars/{uuid}', [CarController::class, 'show'])->name('car.details'); */
 
 Route::post('/cars/{uuid}/reserve', [CarController::class, 'reserve'])->name('car.reserve');
+
+Route::get('/contact', [ContactController::class, 'show'])->name('contact');
+Route::post('/contact', [ContactController::class, 'submit']);
+
 
 // Admin panel routes
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
