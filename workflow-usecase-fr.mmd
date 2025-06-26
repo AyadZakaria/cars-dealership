@@ -1,0 +1,34 @@
+graph TD
+    Invité([Invité])
+    Utilisateur([Utilisateur])
+    Admin([Admin])
+
+    ParcourirVoitures((Parcourir les voitures))
+    VoirDétailsVoiture((Voir les détails d'une voiture))
+    RéserverVoiture((Réserver une voiture))
+    ContacterConcession((Contacter la concession))
+    VoirMesRéservations((Voir mes réservations))
+    GérerVoitures((Gérer les voitures))
+    GérerUtilisateurs((Gérer les utilisateurs))
+    GérerClients((Gérer les clients))
+    GérerRéservations((Gérer les réservations))
+    ConfirmerRéservation((Confirmer une réservation))
+    RefuserRéservation((Refuser une réservation))
+
+    Invité -- Parcourir --> ParcourirVoitures
+    Invité -- Voir détails --> VoirDétailsVoiture
+    Invité -- Réserver --> RéserverVoiture
+    Invité -- Contacter --> ContacterConcession
+
+    Utilisateur -- Parcourir --> ParcourirVoitures
+    Utilisateur -- Voir détails --> VoirDétailsVoiture
+    Utilisateur -- Réserver --> RéserverVoiture
+    Utilisateur -- Mes réservations --> VoirMesRéservations
+    Utilisateur -- Contacter --> ContacterConcession
+
+    Admin -- Gérer --> GérerVoitures
+    Admin -- Gérer --> GérerUtilisateurs
+    Admin -- Gérer --> GérerClients
+    Admin -- Gérer --> GérerRéservations
+    Admin -- Confirmer --> ConfirmerRéservation
+    Admin -- Refuser --> RefuserRéservation

@@ -1,0 +1,34 @@
+graph TD
+    Guest([Guest])
+    User([User])
+    Admin([Admin])
+
+    BrowseCars((Browse Cars))
+    ViewCarDetails((View Car Details))
+    ReserveCar((Reserve Car))
+    ContactDealership((Contact Dealership))
+    ViewMyReservations((View My Reservations))
+    ManageCars((Manage Cars))
+    ManageUsers((Manage Users))
+    ManageCustomers((Manage Customers))
+    ManageReservations((Manage Reservations))
+    ConfirmReservation((Confirm Reservation))
+    DenyReservation((Deny Reservation))
+
+    Guest -- Browse --> BrowseCars
+    Guest -- View Details --> ViewCarDetails
+    Guest -- Reserve --> ReserveCar
+    Guest -- Contact --> ContactDealership
+
+    User -- Browse --> BrowseCars
+    User -- View Details --> ViewCarDetails
+    User -- Reserve --> ReserveCar
+    User -- My Reservations --> ViewMyReservations
+    User -- Contact --> ContactDealership
+
+    Admin -- Manage --> ManageCars
+    Admin -- Manage --> ManageUsers
+    Admin -- Manage --> ManageCustomers
+    Admin -- Manage --> ManageReservations
+    Admin -- Confirm --> ConfirmReservation
+    Admin -- Deny --> DenyReservation

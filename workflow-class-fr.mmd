@@ -1,0 +1,66 @@
+classDiagram
+    class Voiture {
+        +uuid: string
+        +modèle: string
+        +prix: float
+        +en_service: bool
+    }
+    class Client {
+        +uuid: string
+        +user_id: int
+        +nom: string
+        +email: string
+        +téléphone: string
+    }
+    class Réservation {
+        +uuid: string
+        +voiture_uuid: string
+        +client_uuid: string
+        +statut: string
+        +type_réservation: string
+        +confirmée: bool
+        +date_début_location: date
+        +date_fin_location: date
+        +prix_total_location: float
+    }
+    class Location {
+        +voiture_uuid: string
+        +client_uuid: string
+        +date_début_location: date
+        +date_fin_location: date
+        +prix_total: float
+    }
+    class Achat {
+        +voiture_uuid: string
+        +client_uuid: string
+        +date_achat: date
+        +prix_total: float
+    }
+    class Utilisateur {
+        +id: int
+        +nom: string
+        +email: string
+        +client_uuid: string
+    }
+
+    Voiture "1" -- "0..*" Réservation : possède
+    Client "1" -- "0..*" Réservation : effectue
+    Réservation "0..1" -- "1" Location : crée >
+    Réservation "0..1" -- "1" Achat : crée >
+    Utilisateur "1" -- "0..1" Client : profil
+    Voiture "1" -- "0..*" Location : louée
+    Voiture "1" -- "0..*" Achat : vendue
+    Client "1" -- "0..*" Location : loue
+    Client "1" -- "0..*" Achat : achète
+
+    class ControleurVoiture as ContrôleurVoiture
+    class ControleurReservationAdmin as ContrôleurRéservationAdmin
+    class ControleurContact as ContrôleurContact
+
+    ContrôleurVoiture --> Voiture
+    ContrôleurVoiture --> Réservation
+    ContrôleurVoiture --> Client
+    ContrôleurRéservationAdmin --> Réservation
+    ContrôleurRéservationAdmin --> Location
+    ContrôleurRéservationAdmin --> Achat
+    ContrôleurContact --> Utilisateur

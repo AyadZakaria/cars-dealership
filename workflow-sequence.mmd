@@ -1,0 +1,62 @@
+sequenceDiagram
+    participant Guest
+    participant User
+    participant Admin
+    participant WebApp
+    participant CarController
+    participant Reservation
+    participant Customer
+    participant Car
+    participant AdminReservationController as Admin\ReservationController
+    participant Rent
+    participant Purchase
+    participant ContactController
+    participant Mail
+
+    %% Browsing cars
+    Guest->>WebApp: GET /
+    WebApp->>Car: Fetch cars
+    WebApp-->>Guest: Show car list
+
+    %% Reserving a car (Guest)
+    Guest->>WebApp: POST /cars/{uuid}/reserve
+    WebApp->>CarController: reserve()
+    CarController->>Car: Find by uuid
+    CarController->>Customer: Create (if not exists)
+    CarController->>Reservation: Create
+    CarController->>Car: Update in_service = false
+    CarController-->>Guest: Redirect with success
+
+    %% Reserving a car (Authenticated User)
+    User->>WebApp: POST /cars/{uuid}/reserve
+    WebApp->>CarController: reserve()
+    CarController->>Car: Find by uuid
+    CarController->>Customer: Link/Create (if needed)
+    CarController->>Reservation: Create
+    CarController->>Car: Update in_service = false
+    CarController-->>User: Redirect with success
+
+    %% Admin confirms reservation
+    Admin->>WebApp: POST /admin/reservations/{id}/confirm
+    WebApp->>AdminReservationController: confirm()
+    AdminReservationController->>Reservation: Find by id, update status
+    AdminReservationController->>Car: Find by uuid, update in_service
+    AdminReservationController->>Rent: Create (if rent)
+    AdminReservationController->>Purchase: Create (if purchase)
+    AdminReservationController-->>Admin: Redirect with success
+
+    %% Admin denies reservation
+    Admin->>WebApp: POST /admin/reservations/{id}/deny
+    WebApp->>AdminReservationController: deny()
+    AdminReservationController->>Reservation: Find by id, update status
+    AdminReservationController-->>Admin: Redirect with success
+
+    %% Contact form
+    Guest->>WebApp: GET /contact
+    WebApp->>ContactController: show()
+    ContactController-->>Guest: Show contact form
+
+    Guest->>WebApp: POST /contact
+    WebApp->>ContactController: submit()
+    ContactController->>Mail: Send email
+    ContactController-->>Guest: Redirect with success

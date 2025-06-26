@@ -1,0 +1,62 @@
+sequenceDiagram
+    participant Invité
+    participant Utilisateur
+    participant Admin
+    participant ApplicationWeb
+    participant ControleurVoiture as ContrôleurVoiture
+    participant Réservation
+    participant Client
+    participant Voiture
+    participant ControleurReservationAdmin as ContrôleurRéservationAdmin
+    participant Location
+    participant Achat
+    participant ControleurContact as ContrôleurContact
+    participant Courriel
+
+    %% Parcourir les voitures
+    Invité->>ApplicationWeb: GET /
+    ApplicationWeb->>Voiture: Récupérer les voitures
+    ApplicationWeb-->>Invité: Afficher la liste des voitures
+
+    %% Réserver une voiture (Invité)
+    Invité->>ApplicationWeb: POST /cars/{uuid}/reserve
+    ApplicationWeb->>ControleurVoiture: réserver()
+    ControleurVoiture->>Voiture: Trouver par uuid
+    ControleurVoiture->>Client: Créer (si inexistant)
+    ControleurVoiture->>Réservation: Créer
+    ControleurVoiture->>Voiture: Mettre à jour in_service = false
+    ControleurVoiture-->>Invité: Rediriger avec succès
+
+    %% Réserver une voiture (Utilisateur authentifié)
+    Utilisateur->>ApplicationWeb: POST /cars/{uuid}/reserve
+    ApplicationWeb->>ControleurVoiture: réserver()
+    ControleurVoiture->>Voiture: Trouver par uuid
+    ControleurVoiture->>Client: Lier/Créer (si nécessaire)
+    ControleurVoiture->>Réservation: Créer
+    ControleurVoiture->>Voiture: Mettre à jour in_service = false
+    ControleurVoiture-->>Utilisateur: Rediriger avec succès
+
+    %% Admin confirme la réservation
+    Admin->>ApplicationWeb: POST /admin/reservations/{id}/confirm
+    ApplicationWeb->>ControleurReservationAdmin: confirmer()
+    ControleurReservationAdmin->>Réservation: Trouver par id, mettre à jour le statut
+    ControleurReservationAdmin->>Voiture: Trouver par uuid, mettre à jour in_service
+    ControleurReservationAdmin->>Location: Créer (si location)
+    ControleurReservationAdmin->>Achat: Créer (si achat)
+    ControleurReservationAdmin-->>Admin: Rediriger avec succès
+
+    %% Admin refuse la réservation
+    Admin->>ApplicationWeb: POST /admin/reservations/{id}/deny
+    ApplicationWeb->>ControleurReservationAdmin: refuser()
+    ControleurReservationAdmin->>Réservation: Trouver par id, mettre à jour le statut
+    ControleurReservationAdmin-->>Admin: Rediriger avec succès
+
+    %% Formulaire de contact
+    Invité->>ApplicationWeb: GET /contact
+    ApplicationWeb->>ControleurContact: afficher()
+    ControleurContact-->>Invité: Afficher le formulaire de contact
+
+    Invité->>ApplicationWeb: POST /contact
+    ApplicationWeb->>ControleurContact: soumettre()
+    ControleurContact->>Courriel: Envoyer un email
+    ControleurContact-->>Invité: Rediriger avec succès

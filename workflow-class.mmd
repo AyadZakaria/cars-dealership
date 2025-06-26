@@ -1,0 +1,66 @@
+classDiagram
+    class Car {
+        +uuid: string
+        +model: string
+        +price: float
+        +in_service: bool
+    }
+    class Customer {
+        +uuid: string
+        +user_id: int
+        +name: string
+        +email: string
+        +phone: string
+    }
+    class Reservation {
+        +uuid: string
+        +car_uuid: string
+        +customer_uuid: string
+        +status: string
+        +reservation_type: string
+        +is_confirmed: bool
+        +rent_start_date: date
+        +rent_end_date: date
+        +total_rent_price: float
+    }
+    class Rent {
+        +car_uuid: string
+        +customer_uuid: string
+        +rent_start_date: date
+        +rent_end_date: date
+        +total_price: float
+    }
+    class Purchase {
+        +car_uuid: string
+        +customer_uuid: string
+        +purchase_date: date
+        +total_price: float
+    }
+    class User {
+        +id: int
+        +name: string
+        +email: string
+        +customer_uuid: string
+    }
+
+    Car "1" -- "0..*" Reservation : has
+    Customer "1" -- "0..*" Reservation : makes
+    Reservation "0..1" -- "1" Rent : creates >
+    Reservation "0..1" -- "1" Purchase : creates >
+    User "1" -- "0..1" Customer : profile
+    Car "1" -- "0..*" Rent : rented
+    Car "1" -- "0..*" Purchase : sold
+    Customer "1" -- "0..*" Rent : rents
+    Customer "1" -- "0..*" Purchase : buys
+
+    class CarController
+    class AdminReservationController
+    class ContactController
+
+    CarController --> Car
+    CarController --> Reservation
+    CarController --> Customer
+    AdminReservationController --> Reservation
+    AdminReservationController --> Rent
+    AdminReservationController --> Purchase
+    ContactController --> User
