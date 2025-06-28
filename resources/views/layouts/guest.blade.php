@@ -25,7 +25,7 @@
 <body>
     <x-navbar />
     <div class="font-sans text-gray-900 antialiased">
-        @yield('content')
+        {{ $slot }}
     </div>
     @if (!request()->routeIs('login') && !request()->routeIs('register'))
         <x-footer />

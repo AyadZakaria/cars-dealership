@@ -34,7 +34,7 @@ Route::middleware([
 // Car details and reservation
 use App\Http\Middleware\IsAdmin;
 
-/* Route::get('/cars/{uuid}', [CarController::class, 'show'])->name('car.details'); */
+Route::get('/cars/{uuid}', [CarController::class, 'show'])->name('car.details');
 
 Route::post('/cars/{uuid}/reserve', [CarController::class, 'reserve'])->name('car.reserve');
 
