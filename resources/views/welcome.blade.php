@@ -1,5 +1,4 @@
 <x-guest-layout>
-    <x-navbar :cars="$cars" />
     <div class=" min-h-screen py-16 px-4 flex flex-col items-center">
         <!-- Minimal Promo Banner -->
         <div class="w-full max-w-3xl mb-12 text-center">

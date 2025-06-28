@@ -132,7 +132,6 @@
         </main>
     </div>
     {!! ToastMagic::scripts() !!}
-    <x-footer />
 </body>
 
 </html>
