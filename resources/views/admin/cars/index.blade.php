@@ -273,13 +273,13 @@
                                 <div class="text-lg font-semibold text-gray-800 mt-1">
                                     <template x-if="selectedCar.availability === 'for_rent'">
                                         <span>
-                                            MAD <span x-text="selectedCar.price"></span>
+                                            $ <span x-text="selectedCar.price"></span>
                                             <span class="text-xs text-gray-500">/ day</span>
                                         </span>
                                     </template>
                                     <template x-if="selectedCar.availability === 'for_sale'">
                                         <span>
-                                            MAD <span x-text="selectedCar.purchase_price"></span>
+                                            $ <span x-text="selectedCar.purchase_price"></span>
                                         </span>
                                     </template>
                                 </div>
@@ -292,7 +292,7 @@
                             <div>
                                 <div class="text-xs text-gray-500 font-medium mb-1">Mileage</div>
                                 <div class="text-base font-semibold text-gray-700 mt-1">
-                                    <span x-text="selectedCar.mileage"></span> km
+                                    <span x-text="selectedCar.mileage"></span> MI
                                 </div>
                             </div>
                             <div>

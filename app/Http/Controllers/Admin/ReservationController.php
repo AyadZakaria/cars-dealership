@@ -10,6 +10,7 @@ use App\Models\Rent;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
 use Devrabiul\ToastMagic\Facades\ToastMagic;
+use Illuminate\Support\Str;
 
 class ReservationController extends Controller
 {
@@ -83,14 +84,16 @@ class ReservationController extends Controller
         $car = Car::where('uuid', $reservation->car_uuid)->first();
         if ($reservation->reservation_type === 'rent') {
             Rent::create([
+                'uuid' => Str::uuid(),
                 'car_uuid' => $reservation->car_uuid,
                 'customer_uuid' => $reservation->customer_uuid,
                 'rent_start_date' => $reservation->rent_start_date,
                 'rent_end_date' => $reservation->rent_end_date,
                 'total_price' => $reservation->total_rent_price,
             ]);
-        } elseif ($reservation->reservation_type === 'purchase') {
+        } else {
             Purchase::create([
+                'uuid' => Str::uuid(),
                 'car_uuid' => $reservation->car_uuid,
                 'customer_uuid' => $reservation->customer_uuid,
                 'purchase_date' => now(),

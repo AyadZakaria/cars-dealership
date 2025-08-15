@@ -7,7 +7,7 @@ use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
     $cars = Car::orderBy('created_at', 'desc')
-        ->paginate(12);
+        ->paginate(9);
     return view('welcome', compact('cars'));
 })->name('home');
 

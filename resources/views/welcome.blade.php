@@ -87,20 +87,20 @@
                             <span class="bg-gray-100 px-2 py-1 rounded">Fuel: <span
                                     class="font-semibold text-gray-900">{{ ucfirst($car->fuel_type) }}</span></span>
                             <span class="bg-gray-100 px-2 py-1 rounded">Mileage: <span
-                                    class="font-semibold text-gray-900">{{ $car->mileage ?? 'N/A' }}</span> km</span>
+                                    class="font-semibold text-gray-900">{{ $car->mileage ?? 'N/A' }}</span> MI</span>
                         </div>
                         <div class="flex items-center gap-4 mb-2">
                             @if ($car->availability === 'for_sale' && $car->purchase_price)
                                 <div class="flex items-center gap-1">
                                     <span
-                                        class="text-blue-500 font-bold text-lg">MAD{{ number_format($car->purchase_price, 2) }}</span>
+                                        class="text-blue-500 font-bold text-lg">${{ number_format($car->purchase_price, 2) }}</span>
                                     <span class="text-xs text-gray-500">Sale</span>
                                 </div>
                             @endif
                             @if ($car->availability === 'for_rent' && $car->price)
                                 <div class="flex items-center gap-1">
                                     <span
-                                        class="text-yellow-500 font-bold text-lg">MAD{{ number_format($car->price, 2) }}</span>
+                                        class="text-yellow-500 font-bold text-lg">${{ number_format($car->price, 2) }}</span>
                                     <span class="text-xs text-gray-500">/day</span>
                                 </div>
                             @endif
@@ -175,15 +175,15 @@
                                                 {{ ucfirst($car->fuel_type) }}</span>
                                             <span class="text-gray-700 text-base mb-2">Mileage: <span
                                                     class="font-semibold">{{ $car->mileage ?? 'N/A' }}</span>
-                                                km</span>
+                                                MI</span>
                                             @if ($car->availability === 'for_sale' && $car->purchase_price)
                                                 <span
-                                                    class="text-blue-500 font-bold text-xl mb-1">MAD{{ number_format($car->purchase_price, 2) }}
+                                                    class="text-blue-500 font-bold text-xl mb-1">${{ number_format($car->purchase_price, 2) }}
                                                     <span class="text-xs text-gray-500">Sale</span></span>
                                             @endif
                                             @if ($car->availability === 'for_rent' && $car->price)
                                                 <span
-                                                    class="text-yellow-500 font-bold text-xl mb-1">MAD{{ number_format($car->price, 2) }}
+                                                    class="text-yellow-500 font-bold text-xl mb-1">${{ number_format($car->price, 2) }}
                                                     <span class="text-xs text-gray-500">/day</span></span>
                                             @endif
                                             <span class="mt-2">
@@ -218,7 +218,7 @@
                                         <div x-data="{ reserveOpen: true }">
                                             <form method="POST"
                                                 action="{{ route('car.reserve', ['uuid' => $car->uuid]) }}"
-                                                class="space-y-4">
+                                                class="space-y-4" autocomplete="off">
                                                 @csrf
                                                 <div>
                                                     <label class="block text-gray-900 font-medium mb-1"
